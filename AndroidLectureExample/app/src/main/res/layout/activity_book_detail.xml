@@ -35,16 +35,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Title_Test"
-                android:textSize="12pt"
-                android:padding="20px"/>
+                android:textSize="10pt"
+                android:padding="10px"/>
 
             <TextView
                 android:id="@+id/bookDetailAuthor"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="author_Test"
-                android:textSize="10pt"
-                android:padding="20px"/>
+                android:textSize="8pt"
+                android:padding="10px"/>
 
             <TextView
                 android:id="@+id/bookDetailPrice"
@@ -53,7 +53,7 @@
                 android:text="price_Test"
                 android:textSize="8pt"
                 android:textColor="@color/colorRed"
-                android:padding="20px"/>
+                android:padding="10px"/>
 
             <TextView
                 android:id="@+id/bookDetailIsbn"
@@ -61,7 +61,7 @@
                 android:layout_height="wrap_content"
                 android:text="isbn_Test"
                 android:textSize="7pt"
-                android:padding="20px"/>
+                android:padding="10px"/>
 
         </LinearLayout>
 
