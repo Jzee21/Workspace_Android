@@ -88,7 +88,7 @@ public class Example13_BookSearchDetailActivity extends AppCompatActivity {
                 Intent i = new Intent();
                 ComponentName cname =
                         new ComponentName("com.multi.androidlectureexample",
-                                "com.multi.androidlectureexample.BookDetailActivity");
+                                "com.multi.androidlectureexample.BookVODetailActivity");
                 i.setComponent(cname);
                 // 데이터 전달
                 i.putExtra("bookSearchCode", "BookVO");
