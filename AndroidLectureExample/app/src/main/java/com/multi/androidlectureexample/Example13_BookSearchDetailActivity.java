@@ -91,6 +91,7 @@ public class Example13_BookSearchDetailActivity extends AppCompatActivity {
                                 "com.multi.androidlectureexample.BookDetailActivity");
                 i.setComponent(cname);
                 // 데이터 전달
+                i.putExtra("bookSearchCode", "BookVO");
                 i.putExtra("bookIsbn", bookList[position].getIsbn());
                 startActivity(i);
             }

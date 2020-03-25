@@ -23,6 +23,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.Serializable;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
@@ -50,9 +51,9 @@ public class BookDetailActivity extends AppCompatActivity {
         viewIsbn = (TextView) findViewById(R.id.bookDetailIsbn);
 
         Intent i = getIntent();
+
         String keyTitle = (String) i.getExtras().get("bookTitle");
         String keyIsbn = (String) i.getExtras().get("bookIsbn");
-
         viewTitle.setText(keyTitle);
         viewIsbn.setText(keyIsbn);
 
@@ -65,11 +66,11 @@ public class BookDetailActivity extends AppCompatActivity {
                 Bundle bundle = msg.getData();
                 // Book(String isbn, String img, String title, String author, String price)
                 final Book book = new Book(bundle.getString("isbn"),
-                        bundle.getString("img"),
-                        bundle.getString("title"),
-                        bundle.getString("author"),
-                        bundle.getString("price"));
-                Log.i("BookDetail", "handler] "+ book.toString());
+                            bundle.getString("img"),
+                            bundle.getString("title"),
+                            bundle.getString("author"),
+                            bundle.getString("price"));
+                // Log.i("BookDetail", "handler] "+ book.toString());
 
                 viewTitle.setText(book.getTitle());
                 viewAuthor.setText(book.getAuthor());
@@ -97,18 +98,7 @@ public class BookDetailActivity extends AppCompatActivity {
 
                                         ViewGroup.LayoutParams param = viewImg.getLayoutParams();
 
-//                                        Log.i("ViewSize", "System_h) " + metrics.heightPixels);
-//                                        Log.i("ViewSize", "System_w) " + metrics.widthPixels);
-//                                        Log.i("ViewSize", "ViewImg_h) " + param.height);
-//                                        Log.i("ViewSize", "ViewImg_w) " + param.width);
-//                                        Log.i("ViewSize", "Bitmap_h) " + bitmap.getHeight());
-//                                        Log.i("ViewSize", "Bitmap_h) " + bitmap.getWidth());
-
                                         viewImg.setMaxHeight((int) (metrics.heightPixels*0.5));
-//                                        if(param.height > (int) metrics.heightPixels*0.6) {
-//                                            param.width = (int) (metrics.widthPixels*0.6);
-//                                            viewImg.setLayoutParams(param);
-//                                        }
                                     }
                                 });
                             }
@@ -207,7 +197,7 @@ class BookDetailRunnable implements Runnable {
             }
             br.close();
 
-            Log.i("BookDetail", "Book] "+ responseText.toString());
+            // Log.i("BookDetail", "Book] "+ responseText.toString());
             /*[
                 {"isbn":"89-7914-397-4",
                  "img":"http://image.hanbit.co.kr/cover/_m_1397m.gif",
@@ -218,13 +208,13 @@ class BookDetailRunnable implements Runnable {
               ] */
 
             ObjectMapper mapper = new ObjectMapper();
+            Bundle bundle = new Bundle();
+
             Book[] book = mapper.readValue(responseText.toString(), Book[].class);
             //
 //            Log.i("BookDetail", "Book] "+ book.length);
 //            Log.i("BookDetail", "Book] "+ book[0].toString());
 
-            //
-            Bundle bundle = new Bundle();
 //            bundle.putString("String key", "String value");
 //            bundle.putStringArray("String key", new String[]{"String[] values"});
             bundle.putString("title", book[0].getTitle());
