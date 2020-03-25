@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:background="@color/colorPuple"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/sumTv4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <Button
+        android:id="@+id/startBtn4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="연산 시작!"/>
+
+    <Button
+        android:id="@+id/secondBtn4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="두번째 작업 시작!"/>
+
+    <ProgressBar
+        android:id="@+id/counterProgress2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@android:style/Widget.ProgressBar.Horizontal"
+        android:progress="0"/>
+
+</LinearLayout>

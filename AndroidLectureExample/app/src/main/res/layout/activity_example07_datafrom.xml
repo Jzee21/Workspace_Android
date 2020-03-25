@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:background="@color/colorPuple"
+    android:orientation="vertical">
+
+    <Spinner
+        android:id="@+id/mySpinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <Button
+        android:id="@+id/sendDataBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="이전 Activity로 데이터 전송"/>
+
+</LinearLayout>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:background="@color/colorPuple"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/sumTv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <Button
+        android:id="@+id/startBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="연산 시작! (ANR 발생 목적)"/>
+
+    <Button
+        android:id="@+id/secondBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="두번째 작업 시작!"/>
+
+</LinearLayout>
