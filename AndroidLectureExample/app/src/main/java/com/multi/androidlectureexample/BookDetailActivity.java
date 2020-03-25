@@ -143,6 +143,11 @@ public class BookDetailActivity extends AppCompatActivity {
 
     }
 
+    private Bitmap gitBookImgBase64(String url) {
+
+        return null;
+    }
+
     private Bitmap getBookImg(String url) {
 
         URL imgUrl = null;

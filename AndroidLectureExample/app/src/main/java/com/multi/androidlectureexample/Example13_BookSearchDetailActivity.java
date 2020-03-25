@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.content.ComponentName;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -15,14 +16,12 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 
 /*  - 첫 화면은 키워드를 이용한 책 목록 출력
@@ -84,9 +83,16 @@ public class Example13_BookSearchDetailActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                Toast.makeText(getApplicationContext(), bookList[position].getIsbn(), Toast.LENGTH_SHORT).show();
+                // Toast.makeText(getApplicationContext(), bookList[position].getIsbn(), Toast.LENGTH_SHORT).show();
 
-                // Intent i = new Intent();
+                Intent i = new Intent();
+                ComponentName cname =
+                        new ComponentName("com.multi.androidlectureexample",
+                                "com.multi.androidlectureexample.BookDetailActivity");
+                i.setComponent(cname);
+                // 데이터 전달
+                i.putExtra("bookIsbn", bookList[position].getIsbn());
+                startActivity(i);
             }
         });
 
@@ -145,7 +151,7 @@ class MyBookInfoRunnable implements Runnable {
 
 
         } catch (Exception e) {
-            Log.i("BookSearchDetail", "Runnable : ");
+            Log.i("BookSearchDetail", "Runnable : "+e);
         }
     }
 }
@@ -163,7 +169,7 @@ class BookVO {
     private String supplement;
     private String publisher;
     private String imgurl;
-    private String imbase64;
+    private String imgbase64;
 
     // constructor
     public BookVO() {}
@@ -252,12 +258,12 @@ class BookVO {
         this.imgurl = imgurl;
     }
 
-    public String getImbase64() {
-        return imbase64;
+    public String getImgbase64() {
+        return imgbase64;
     }
 
-    public void setImbase64(String imbase64) {
-        this.imbase64 = imbase64;
+    public void setImgbase64(String imgbase64) {
+        this.imgbase64 = imgbase64;
     }
 
 }
