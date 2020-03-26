@@ -10,4 +10,22 @@
         android:layout_height="wrap_content"
         android:text="Implicit Intent를 이용한 Activity 호출"/>
 
+    <Button
+        android:id="@+id/dialBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="전화걸기 Activity 호출"/>
+
+    <Button
+        android:id="@+id/browserBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Browser(Chrome) Activity 호출"/>
+
+    <Button
+        android:id="@+id/callBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="전화걸기 기능 호출"/>
+
 </LinearLayout>

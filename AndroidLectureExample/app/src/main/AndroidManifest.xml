@@ -3,6 +3,7 @@
     package="com.multi.androidlectureexample">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
 
     <application
         android:allowBackup="true"
@@ -12,11 +13,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+        <activity android:name=".Example15_ServiceLifecycleActivity"></activity>
         <activity android:name=".Example14sub_ImplicitIntentActivity">
             <intent-filter>
-                <action android:name="MY_ACTION"/>
-                <category android:name="android.intent.category.DEFAULT"/>
-                <category android:name="INTENT_TEST"/>
+                <action android:name="MY_ACTION" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="INTENT_TEST" />
             </intent-filter>
         </activity>
         <activity android:name=".Example14_ImplicitIntentActivity" />
