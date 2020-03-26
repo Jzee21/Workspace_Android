@@ -113,6 +113,7 @@ public class Example14_ImplicitIntentActivity extends AppCompatActivity {
                                     });
                             dialog.show();
 
+                        // (shouldShowRequestPermissionRationale(Manifest.permission.CALL_PHONE))
                         } else {
                             // 권한을 거부한 적이 없음  - 권한 요청이 처음
                             requestPermissions(new String[]{Manifest.permission.CALL_PHONE},
@@ -120,6 +121,7 @@ public class Example14_ImplicitIntentActivity extends AppCompatActivity {
                             // >> onRequestPermissionsResult() 메서드가 호출된다.
                         }
 
+                    // (permissionResult == PackageManager.PERMISSION_DENIED)
                     } else {
                         // get allowed
                         Intent i = new Intent();
@@ -128,16 +130,16 @@ public class Example14_ImplicitIntentActivity extends AppCompatActivity {
                         startActivity(i);
                     }
 
+                // (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
                 } else {
                     // ~ Android 5.1
                     Intent i = new Intent();
                     i.setAction(Intent.ACTION_CALL);
                     i.setData(Uri.parse("tel:0102345-6789"));
                     startActivity(i);
-
                 }
             }
-        });
+        }); // callBtn.setOnClickListener()
 
     } // onCreate()
 
@@ -165,5 +167,5 @@ public class Example14_ImplicitIntentActivity extends AppCompatActivity {
             }
         }
 
-    }
+    }// onRequestPermissionsResult()
 }

@@ -13,7 +13,12 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Example15_ServiceLifecycleActivity"></activity>
+        <service
+            android:name=".Example15sub_LifecycleService"
+            android:enabled="true"
+            android:exported="true"></service>
+
+        <activity android:name=".Example15_ServiceLifecycleActivity" />
         <activity android:name=".Example14sub_ImplicitIntentActivity">
             <intent-filter>
                 <action android:name="MY_ACTION" />
