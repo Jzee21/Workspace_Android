@@ -7,21 +7,22 @@ import android.util.Log;
 
 public class Example15sub_LifecycleService extends Service {
 
-    private Thread myThread = new Thread(new Runnable() {
-        @Override
-        public void run() {
-            // ex : 1sec 간격으로 1~10 count
-            //      >> log(count)
-            for (int i=0 ; i<10 ; i++) {
-                try {
-                    Thread.sleep(1000);     // 1 sec
-                    Log.i("ServiceExam", "count : " + i);
-                } catch (Exception e) {
-                    Log.i("ServiceExam", "["+i+"] e : " + e.toString());
-                }
-            }// for()
-        }// run()
-    });
+    private Thread myThread;
+//    private Thread myThread = new Thread(new Runnable() {
+//        @Override
+//        public void run() {
+//            // ex : 1sec 간격으로 1~10 count
+//            //      >> log(count)
+//            for (int i=0 ; i<10 ; i++) {
+//                try {
+//                    Thread.sleep(1000);     // 1 sec
+//                    Log.i("ServiceExam", "count : " + i);
+//                } catch (Exception e) {
+//                    Log.i("ServiceExam", "["+i+"] e : " + e.toString());
+//                }
+//            }// for()
+//        }// run()
+//    });
 
     public Example15sub_LifecycleService() {
     }
@@ -46,6 +47,28 @@ public class Example15sub_LifecycleService extends Service {
         //      >> log(count)
         Log.i("ServiceExam", "onStartCommand()");
         try {
+            myThread = new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    // ex : 1sec 간격으로 1~10 count
+                    //      >> log(count)
+                    for (int i=0 ; i<10 ; i++) {
+                        try {
+                            Thread.sleep(1000);     // 1 sec
+                            /*
+                                sleep 하려고 할 때,
+                                만약 interrupt가 걸려있다면,
+                                Exception을 발생시켜 catch문으로 이동
+                                >> loop를 벗어나도록 catch 문에 braek; 작성
+                            */
+                            Log.i("ServiceExam", "count : " + i);
+                        } catch (Exception e) {
+                            Log.i("ServiceExam", "["+i+"] e : " + e.toString());
+                            break;
+                        }
+                    }// for()
+                }// run()
+            });
             myThread.start();
         } catch (Exception e) {
             Log.i("ServiceExam", "Thread.start() : " + e);
@@ -66,7 +89,14 @@ public class Example15sub_LifecycleService extends Service {
 
     @Override
     public void onDestroy() {
-        // Service 객체가 메모리에서 정리될 때
+        // stopService()가 호출되면 onDestroy()가 호출된다.
+        // 여기에서 Service에 의해 동작중인 모든 Thread를 종료한다.
+        if (myThread != null && myThread.isAlive()) {
+            // myThread.isAlive() : Thread가 실행중인지 확인
+            // myThread.stop();    // now, not suggest stop()  // lot of Exception
+            myThread.interrupt();
+        }
+
         super.onDestroy();
         Log.i("ServiceExam", "onDestroy()");
     }

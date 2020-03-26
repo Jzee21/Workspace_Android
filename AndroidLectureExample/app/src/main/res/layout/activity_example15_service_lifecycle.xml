@@ -16,4 +16,21 @@
         android:text="Service 중지"
         android:id="@+id/stopServiceBtn"/>
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorLightGray"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="My Service 시작"
+        android:id="@+id/startMyServiceBtn"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="My Service 중지"
+        android:id="@+id/stopMyServiceBtn"/>
+
 </LinearLayout>

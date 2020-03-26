@@ -35,8 +35,33 @@ public class Example15_ServiceLifecycleActivity extends AppCompatActivity {
         stopServiceBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent i = new Intent(getApplicationContext(),
+                        Example15sub_LifecycleService.class);
+                stopService(i);
             }
         });
+
+        // MyService
+        Button startMyServiceBtn = (Button)findViewById(R.id.startMyServiceBtn);
+        startMyServiceBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Service Component 시작
+                Intent i = new Intent(getApplicationContext(),
+                        MyLifecycleService.class);
+                startService(i);
+            }
+        });
+
+        Button stopMyServiceBtn = (Button)findViewById(R.id.stopMyServiceBtn);
+        stopMyServiceBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getApplicationContext(),
+                        MyLifecycleService.class);
+                stopService(i);
+            }
+        });
+
     }
 }
