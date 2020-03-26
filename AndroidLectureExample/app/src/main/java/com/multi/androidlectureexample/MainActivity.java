@@ -262,6 +262,29 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        /*  App이 실행되었을 때 항상 Activity가 보이는 것은 아니다.
+            가장 대표적인 경우 : 카카오톡, 멜론, 벅스 등...
+            즉, Service는 화면이 없는 Activity라고 생각하자...?
+
+            Activity : onCreate() > onStart() > onResume() > onPause > onStop()
+            Service  : onCreate() > onStartCommand() > onDestroy()
+            - 눈에 보이지 않기 때문에 background 에서 로직처리하는데 주로 사용된다.
+        */
+        // _15_ServiceLifecycleBtn
+        Button _15_ServiceLifecycleBtn = (Button) findViewById(R.id._15_ServiceLifecycleBtn);
+        _15_ServiceLifecycleBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent();
+                ComponentName cname =
+                        new ComponentName("com.multi.androidlectureexample",
+                                "com.multi.androidlectureexample.Example15_ServiceLifecycleActivity");
+                i.setComponent(cname);
+                startActivity(i);
+            }
+        });
+
+
 
     }   // onCreate()
 

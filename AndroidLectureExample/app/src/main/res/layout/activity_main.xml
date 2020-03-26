@@ -107,6 +107,12 @@
                 android:layout_height="wrap_content"
                 android:text="14. ImplicitIntentBtn"/>
 
+            <Button
+                android:id="@+id/_15_ServiceLifecycleBtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="15. Service Lifecycle"/>
+
         </LinearLayout>
 
     </LinearLayout>
