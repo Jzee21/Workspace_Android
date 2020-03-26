@@ -246,6 +246,22 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        // _14_ImplicitIntentBtn
+        Button _14_ImplicitIntentBtn = (Button) findViewById(R.id._14_ImplicitIntentBtn);
+        _14_ImplicitIntentBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Explicit 방식 Activity 호출 (명시적 Intent)
+                Intent i = new Intent();
+                ComponentName cname =
+                        new ComponentName("com.multi.androidlectureexample",
+                                "com.multi.androidlectureexample.Example14_ImplicitIntentActivity");
+                i.setComponent(cname);
+                startActivity(i);
+
+            }
+        });
+
 
     }   // onCreate()
 

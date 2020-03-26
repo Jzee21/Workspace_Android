@@ -12,7 +12,15 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".BookVODetailActivity"></activity>
+        <activity android:name=".Example14sub_ImplicitIntentActivity">
+            <intent-filter>
+                <action android:name="MY_ACTION"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="INTENT_TEST"/>
+            </intent-filter>
+        </activity>
+        <activity android:name=".Example14_ImplicitIntentActivity" />
+        <activity android:name=".BookVODetailActivity" />
         <activity android:name=".BookDetailActivity" />
         <activity android:name=".Example13_BookSearchDetailActivity" />
         <activity android:name=".Example12_BookSearchSimpleActivity" />

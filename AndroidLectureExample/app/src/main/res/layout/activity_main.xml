@@ -101,6 +101,12 @@
                 android:layout_height="wrap_content"
                 android:text="13. 도서검색 프로그램(확장)"/>
 
+            <Button
+                android:id="@+id/_14_ImplicitIntentBtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="14. ImplicitIntentBtn"/>
+
         </LinearLayout>
 
     </LinearLayout>
