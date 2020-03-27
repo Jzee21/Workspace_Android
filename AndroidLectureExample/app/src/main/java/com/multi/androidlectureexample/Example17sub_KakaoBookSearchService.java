@@ -96,7 +96,6 @@ public class Example17sub_KakaoBookSearchService extends Service {
                 //URL url = new URL("https://dapi.kakao.com/v3/search/book?query="+keyword);
 
                 String url = "https://dapi.kakao.com/v3/search/book?target=title&query=" + keyword;
-                String REST_KEY = "8257251b04123102a2155bfa601dbbc5";
 
                 // HTTP 접속 -------
                 URL obj = new URL(url);
