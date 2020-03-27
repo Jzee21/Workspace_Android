@@ -13,10 +13,19 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+        <activity android:name=".Example17_KakaoBookSearchActivity"></activity>
+
+        <service
+            android:name=".Example16sub_DataTransferService"
+            android:enabled="true"
+            android:exported="true" />
+
+        <activity android:name=".Example16_ServiceDataTransferActivity" />
+
         <service
             android:name=".MyLifecycleService"
             android:enabled="true"
-            android:exported="true"></service>
+            android:exported="true" />
         <service
             android:name=".Example15sub_LifecycleService"
             android:enabled="true"

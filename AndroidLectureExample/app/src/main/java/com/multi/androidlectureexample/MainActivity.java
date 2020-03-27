@@ -284,6 +284,35 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        // _16_ActivityServiceDataBtn
+        Button _16_ActivityServiceDataBtn = (Button) findViewById(R.id._16_ActivityServiceDataBtn);
+        _16_ActivityServiceDataBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent();
+                ComponentName cname =
+                        new ComponentName("com.multi.androidlectureexample",
+                                "com.multi.androidlectureexample.Example16_ServiceDataTransferActivity");
+                i.setComponent(cname);
+                startActivity(i);
+            }
+        });
+
+        // _17_KakaoBookSearchBtn
+        Button _17_KakaoBookSearchBtn = (Button) findViewById(R.id._17_KakaoBookSearchBtn);
+        _17_KakaoBookSearchBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent();
+                ComponentName cname =
+                        new ComponentName("com.multi.androidlectureexample",
+                                "com.multi.androidlectureexample.Example17_KakaoBookSearchActivity");
+                i.setComponent(cname);
+                startActivity(i);
+            }
+        });
+
+
 
 
     }   // onCreate()

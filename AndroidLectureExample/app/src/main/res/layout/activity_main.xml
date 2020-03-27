@@ -113,6 +113,18 @@
                 android:layout_height="wrap_content"
                 android:text="15. Service Lifecycle"/>
 
+            <Button
+                android:id="@+id/_16_ActivityServiceDataBtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="16. Avtivity와 Service의 데이터 전달"/>
+
+            <Button
+                android:id="@+id/_17_KakaoBookSearchBtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="17. Kakao 도서 검색"/>
+
         </LinearLayout>
 
     </LinearLayout>
