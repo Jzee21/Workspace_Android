@@ -13,7 +13,12 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Example17_KakaoBookSearchActivity"></activity>
+        <service
+            android:name=".Example17sub_KakaoBookSearchService"
+            android:enabled="true"
+            android:exported="true"></service>
+
+        <activity android:name=".Example17_KakaoBookSearchActivity" />
 
         <service
             android:name=".Example16sub_DataTransferService"
