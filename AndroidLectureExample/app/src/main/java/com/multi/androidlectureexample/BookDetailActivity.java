@@ -98,7 +98,7 @@ public class BookDetailActivity extends AppCompatActivity {
 
                                         ViewGroup.LayoutParams param = viewImg.getLayoutParams();
 
-//                                        param.height = {};
+//                                        param.height = 100;
 //                                        param.width = {};
 //                                        viewImg.setLayoutParams(param);
                                         viewImg.setMaxHeight((int) (metrics.heightPixels*0.5));
