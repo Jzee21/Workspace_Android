@@ -7,6 +7,7 @@ import androidx.core.app.ActivityCompat;
 
 import android.Manifest;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
@@ -24,19 +25,26 @@ import android.widget.TextView;
 *       >>  수신할 Broadcast를 <intent-filter>로 추가
 *
 *   3. SMS Broadcast를 수신하여 Activity에게 전달
-*       - Activity 실행 시 보안설정 요청
+*       - Activity 실행 시 보안설정 확인 및 요청
+*
+*   4. SMS 수신 시 Broadcast Receiver가 받아서
+*       Intent에 담아 Activity 에 전달
 *
 */
 public class Example19_BRSMSActivity extends AppCompatActivity {
+
+    private TextView _19_smsSender;
+    private TextView _19_smsMessage;
+    private TextView _19_smsDate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_example19_br_sms);
 
-        TextView _19_smsSender = (TextView) findViewById(R.id._19_smsSenderTv);
-        TextView _19_smsMessage = (TextView) findViewById(R.id._19_smsMessageTv);
-        TextView _19_smsDate = (TextView) findViewById(R.id._19_smsDateTv);
+        _19_smsSender = (TextView) findViewById(R.id._19_smsSenderTv);
+        _19_smsMessage = (TextView) findViewById(R.id._19_smsMessageTv);
+        _19_smsDate = (TextView) findViewById(R.id._19_smsDateTv);
 
         // SMS 보안처리  >>  권한 요청
         // 1. Android Version M~ 확인
@@ -73,6 +81,7 @@ public class Example19_BRSMSActivity extends AppCompatActivity {
                         }
                     });
                     dialog.create().show();
+                // 권한 요청 기록 확인
                 } else {
                     // False  >>  처음 권한을 요청한 경우
                     requestPermissions(
@@ -80,12 +89,12 @@ public class Example19_BRSMSActivity extends AppCompatActivity {
                             100);
                     // call onRequestPermissionsResult()
                 }
-
+            // 권한 확인
             } else {
                 // 권한이 있다면
                 Log.i("SMSTest", "보안설정 통과");
             }
-
+        // 버전 확인
         } else {
             // M 버전 미만
             // AndroidManifest 에서
@@ -108,4 +117,24 @@ public class Example19_BRSMSActivity extends AppCompatActivity {
             }
         }
     } // onRequestPermissionsResult()
+
+    /*
+    private TextView _19_smsSender;
+    private TextView _19_smsMessage;
+    private TextView _19_smsDate;
+     */
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+
+        String sender = intent.getExtras().getString("sender");
+        String msg   = intent.getExtras().getString("msg");
+        String date  = intent.getExtras().getString("date");
+
+        _19_smsSender.setText(sender);
+        _19_smsMessage.setText(msg);
+        _19_smsDate.setText(date);
+
+    }
 }
