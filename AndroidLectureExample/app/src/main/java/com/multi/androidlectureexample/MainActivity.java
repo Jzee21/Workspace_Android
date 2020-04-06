@@ -312,6 +312,33 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        // _18_BRTestBtn
+        Button _18_BRTestBtn = (Button) findViewById(R.id._18_BRTestBtn);
+        _18_BRTestBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent();
+                ComponentName cname =
+                        new ComponentName("com.multi.androidlectureexample",
+                                "com.multi.androidlectureexample.Example18_BRTestActivity");
+                i.setComponent(cname);
+                startActivity(i);
+            }
+        });
+
+        // _19_BRSMSBtn
+        Button _19_BRSMSBtn = (Button) findViewById(R.id._19_BRSMSBtn);
+        _19_BRSMSBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent();
+                ComponentName cname =
+                        new ComponentName("com.multi.androidlectureexample",
+                                "com.multi.androidlectureexample.Example19_BRSMSActivity");
+                i.setComponent(cname);
+                startActivity(i);
+            }
+        });
 
 
 

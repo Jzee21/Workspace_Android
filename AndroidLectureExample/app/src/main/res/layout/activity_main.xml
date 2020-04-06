@@ -125,6 +125,18 @@
                 android:layout_height="wrap_content"
                 android:text="17. Kakao 도서 검색"/>
 
+            <Button
+                android:id="@+id/_18_BRTestBtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="18. Broadcast Receiver 실습"/>
+
+            <Button
+                android:id="@+id/_19_BRSMSBtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="19. SMS를 받기 위한 Broadcast Receiver"/>
+
         </LinearLayout>
 
     </LinearLayout>
