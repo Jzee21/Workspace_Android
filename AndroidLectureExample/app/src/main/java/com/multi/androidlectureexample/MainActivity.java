@@ -340,6 +340,20 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        // _20_BRNotiBtn
+        Button _20_BRNotiBtn = (Button) findViewById(R.id._20_BRNotiBtn);
+        _20_BRNotiBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent();
+                ComponentName cname =
+                        new ComponentName("com.multi.androidlectureexample",
+                                "com.multi.androidlectureexample.Example20_BRNotiActivity");
+                i.setComponent(cname);
+                startActivity(i);
+            }
+        });
+
 
 
     }   // onCreate()

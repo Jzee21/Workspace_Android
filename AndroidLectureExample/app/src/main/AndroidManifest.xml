@@ -14,6 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+        <activity android:name=".Example20_BRNotiActivity"></activity>
 
         <receiver
             android:name=".Example19sub_SMSBroadcastReceiver"

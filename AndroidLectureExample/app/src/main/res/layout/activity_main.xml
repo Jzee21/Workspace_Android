@@ -137,6 +137,12 @@
                 android:layout_height="wrap_content"
                 android:text="19. SMS를 받기 위한 Broadcast Receiver"/>
 
+            <Button
+                android:id="@+id/_20_BRNotiBtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="20. Broadcast Receiver를 이용한 알림"/>
+
         </LinearLayout>
 
     </LinearLayout>
