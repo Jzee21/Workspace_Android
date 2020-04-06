@@ -67,6 +67,7 @@ public class Example20_BRNotiActivity extends AppCompatActivity {
                             nChannel.setVibrationPattern(new long[]{100,200,100,200});  // millisecond 0.1s
                             // LED
                             nChannel.enableLights(true);
+//                            nChannel.setLightColor(int argb);
                             // 잠금화면 알림
                             nChannel.setLockscreenVisibility(Notification.VISIBILITY_PRIVATE);
 
@@ -84,6 +85,7 @@ public class Example20_BRNotiActivity extends AppCompatActivity {
                         Intent nIntent = new Intent(getApplicationContext(), Example20_BRNotiActivity.class);
                         nIntent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
                         nIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        // nIntent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP)
 
                         // 중복되지 않는 상수값을 사용하기 위해서
                         int requestID = (int) System.currentTimeMillis();
