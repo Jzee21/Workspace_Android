@@ -15,14 +15,14 @@
             android:layout_height="wrap_content"
             android:layout_weight="3"
             android:hint="DB 이름을 입력하세요"
-            android:id="@+id/_21_dbNameEt" />
+            android:id="@+id/_22_dbNameEt" />
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="DB 생성"
-            android:id="@+id/_21_dbCreateBtn" />
+            android:id="@+id/_22_dbCreateBtn" />
 
     </LinearLayout>
 
@@ -42,14 +42,14 @@
             android:layout_height="wrap_content"
             android:layout_weight="3"
             android:hint="Table 이름을 입력하세요"
-            android:id="@+id/_21_tableNameEt" />
+            android:id="@+id/_22_tableNameEt" />
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Table 생성"
-            android:id="@+id/_21_tableCreateBtn" />
+            android:id="@+id/_22_tableCreateBtn" />
 
     </LinearLayout>
 
@@ -68,25 +68,25 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="이름을 입력하세요"
-            android:id="@+id/_21_empNameEt" />
+            android:id="@+id/_22_empNameEt" />
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="나이를 입력하세요"
-            android:id="@+id/_21_empAgeEt" />
+            android:id="@+id/_22_empAgeEt" />
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="전화번호를 입력하세요"
-            android:id="@+id/_21_empMobileEt" />
+            android:id="@+id/_22_empMobileEt" />
 
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="사용자 입력"
-            android:id="@+id/_21_empInsertBtn" />
+            android:id="@+id/_22_empInsertBtn" />
 
     </LinearLayout>
 
@@ -99,7 +99,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="모든 사람 출력"
-        android:id="@+id/_21_empSelectBtn" />
+        android:id="@+id/_22_empSelectBtn" />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -108,9 +108,8 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/_21_resultTv" />
+            android:id="@+id/_22_resultTv" />
 
     </ScrollView>
 
 </LinearLayout>
-
