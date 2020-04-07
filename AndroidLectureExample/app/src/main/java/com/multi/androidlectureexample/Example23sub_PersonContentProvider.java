@@ -53,7 +53,7 @@ public class Example23sub_PersonContentProvider extends ContentProvider {
         // TODO: Implement this to initialize your content provider on startup.
         // return false;
 
-        // 앱 실행 시 Android System에 의해서 Content Provider가 자동적으로 생성된다.\
+        // 앱 실행 시 Android System에 의해서 Content Provider가 자동적으로 생성된다.
         // 여기에 Database 생성 및 Table 생성 코드가 오면 된다
         // 또한, DB Reference를 획득하는 코드도 오면 된다.
         Log.i("DBTest", "CP_onCreate()");
