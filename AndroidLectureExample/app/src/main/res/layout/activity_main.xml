@@ -155,6 +155,12 @@
                 android:layout_height="wrap_content"
                 android:text="22. SQLite Helper 사용"/>
 
+            <Button
+                android:id="@+id/_23_CPExamBtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="23. Content Provider 사용"/>
+
         </LinearLayout>
 
     </LinearLayout>

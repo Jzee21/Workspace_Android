@@ -382,6 +382,20 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        // _23_CPExamBtn
+        Button _23_CPExamBtn = (Button) findViewById(R.id._23_CPExamBtn);
+        _23_CPExamBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent();
+                ComponentName cname =
+                        new ComponentName("com.multi.androidlectureexample",
+                                "com.multi.androidlectureexample.Example23_CPExamActivity");
+                i.setComponent(cname);
+                startActivity(i);
+            }
+        }); // _23_CPExamBtn
+
 
 
     }   // onCreate()
