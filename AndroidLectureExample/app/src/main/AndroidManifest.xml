@@ -6,6 +6,13 @@
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.RECEIVE_SMS" />
 
+    <permission
+        android:name="com.multi.person.provider.READ_DATABASE"
+        android:protectionLevel="normal"/>
+    <permission
+        android:name="com.multi.person.provider.WRITE_DATABASE"
+        android:protectionLevel="normal"/>
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -14,7 +21,16 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Example23_CPExamActivity"></activity>
+
+        <provider
+            android:name=".Example23sub_PersonContentProvider"
+            android:authorities="com.multi.person.provider"
+            android:enabled="true"
+            android:exported="true"
+            android:readPermission="com.multi.person.provider.READ_DATABASE"
+            android:writePermission="com.multi.person.provider.WRITE_DATABASE"/>
+
+        <activity android:name=".Example23_CPExamActivity" />
         <activity android:name=".Example22_SQLiteHelperActivity" />
         <activity android:name=".Example21_SQLiteBasicActivity" />
         <activity android:name=".Example20_BRNotiActivity" />
