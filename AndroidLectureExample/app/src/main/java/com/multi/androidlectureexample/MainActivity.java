@@ -354,6 +354,34 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        // _21_SQLiteBasicBtn
+        Button _21_SQLiteBasicBtn = (Button) findViewById(R.id._21_SQLiteBasicBtn);
+        _21_SQLiteBasicBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent();
+                ComponentName cname =
+                        new ComponentName("com.multi.androidlectureexample",
+                                "com.multi.androidlectureexample.Example21_SQLiteBasicActivity");
+                i.setComponent(cname);
+                startActivity(i);
+            }
+        });
+
+        // _22_SQLiteHelperBtn
+        Button _22_SQLiteHelperBtn = (Button) findViewById(R.id._22_SQLiteHelperBtn);
+        _22_SQLiteHelperBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent();
+                ComponentName cname =
+                        new ComponentName("com.multi.androidlectureexample",
+                                "com.multi.androidlectureexample.Example22_SQLiteHelperActivity");
+                i.setComponent(cname);
+                startActivity(i);
+            }
+        });
+
 
 
     }   // onCreate()

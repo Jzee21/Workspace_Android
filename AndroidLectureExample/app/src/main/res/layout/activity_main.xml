@@ -143,6 +143,18 @@
                 android:layout_height="wrap_content"
                 android:text="20. Broadcast Receiver를 이용한 알림"/>
 
+            <Button
+                android:id="@+id/_21_SQLiteBasicBtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="21. SQLite Basic 실습"/>
+
+            <Button
+                android:id="@+id/_22_SQLiteHelperBtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="22. SQLite Helper 사용"/>
+
         </LinearLayout>
 
     </LinearLayout>
