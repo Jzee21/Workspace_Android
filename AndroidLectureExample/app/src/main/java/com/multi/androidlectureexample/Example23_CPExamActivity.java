@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.net.Uri;
@@ -12,6 +13,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 /*
 *   Content Provider (내용제공자)
@@ -67,7 +69,33 @@ public class Example23_CPExamActivity extends AppCompatActivity {
 
         //
         // _23_empSelectBtn
-        // _23_resultTv
+        Button _23_empSelectBtn = findViewById(R.id._23_empSelectBtn);
+        _23_empSelectBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.i("DBTest","Click Select");
+                // Content Provider 를 이용해 DB의 내용 받기
+                String uriString = "content://com.multi.person.provider/person";
+                Uri uri = new Uri.Builder().build().parse(uriString);
+
+                String[] columns = new String[]{"name", "age", "mobile"};
+//                getContentResolver().query(Uri, columns, 조건, 조건Args, 정렬조건)
+                Cursor cursor = getContentResolver().query(uri, columns,
+                        null, null, "name ASC");
+
+                TextView _23_resultTv = findViewById(R.id._23_resultTv);
+                _23_resultTv.setText("");
+
+                while (cursor.moveToNext()) {
+                    String name = cursor.getString(0);
+                    int age = cursor.getInt(1);
+                    String mobile = cursor.getString(2);
+
+                    String result = "recode : " + name + ", " + age + ", " + mobile + "\n";
+                    _23_resultTv.append(result);
+                }
+            }
+        }); // _23_empSelectBtn
     }
 }
 

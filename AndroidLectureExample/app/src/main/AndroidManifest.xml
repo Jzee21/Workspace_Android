@@ -8,10 +8,10 @@
 
     <permission
         android:name="com.multi.person.provider.READ_DATABASE"
-        android:protectionLevel="normal"/>
+        android:protectionLevel="normal" />
     <permission
         android:name="com.multi.person.provider.WRITE_DATABASE"
-        android:protectionLevel="normal"/>
+        android:protectionLevel="normal" />
 
     <application
         android:allowBackup="true"
@@ -21,6 +21,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+        <activity android:name=".Example24_ContactActivity"></activity>
 
         <provider
             android:name=".Example23sub_PersonContentProvider"
@@ -28,7 +29,7 @@
             android:enabled="true"
             android:exported="true"
             android:readPermission="com.multi.person.provider.READ_DATABASE"
-            android:writePermission="com.multi.person.provider.WRITE_DATABASE"/>
+            android:writePermission="com.multi.person.provider.WRITE_DATABASE" />
 
         <activity android:name=".Example23_CPExamActivity" />
         <activity android:name=".Example22_SQLiteHelperActivity" />
