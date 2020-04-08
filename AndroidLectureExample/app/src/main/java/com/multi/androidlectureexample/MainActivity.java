@@ -396,6 +396,19 @@ public class MainActivity extends AppCompatActivity {
             }
         }); // _23_CPExamBtn
 
+        // _24_ContactBtn
+        Button _24_ContactBtn = (Button) findViewById(R.id._24_ContactBtn);
+        _24_ContactBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent();
+                ComponentName cname =
+                        new ComponentName("com.multi.androidlectureexample",
+                                "com.multi.androidlectureexample.Example24_ContactActivity");
+                i.setComponent(cname);
+                startActivity(i);
+            }
+        }); //_24_ContactBtn
 
 
     }   // onCreate()
