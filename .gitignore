@@ -1,9 +1,6 @@
 # Created by https://www.gitignore.io/api/java,androidstudio
 # Edit at https://www.gitignore.io/?templates=java,androidstudio
 
-# Project
-MyFirstApp/
-
 ### Java ###
 # Compiled class file
 *.class
