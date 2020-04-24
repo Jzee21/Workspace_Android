@@ -23,7 +23,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Example24_ContactActivity"></activity>
+        <activity android:name=".Example25_ArduinoLEDActivity"></activity>
+        <activity android:name=".Example24_ContactActivity" />
 
         <provider
             android:name=".Example23sub_PersonContentProvider"

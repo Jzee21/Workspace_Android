@@ -410,6 +410,20 @@ public class MainActivity extends AppCompatActivity {
             }
         }); //_24_ContactBtn
 
+        // _25_ArduinoLEDBtn
+        Button _25_ArduinoLEDBtn = (Button) findViewById(R.id._25_ArduinoLEDBtn);
+        _25_ArduinoLEDBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent();
+                ComponentName cname =
+                        new ComponentName("com.multi.androidlectureexample",
+                                "com.multi.androidlectureexample.Example25_ArduinoLEDActivity");
+                i.setComponent(cname);
+                startActivity(i);
+            }
+        }); // _25_ArduinoLEDBtn
+
 
     }   // onCreate()
 
