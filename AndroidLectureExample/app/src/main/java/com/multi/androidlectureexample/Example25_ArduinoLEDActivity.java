@@ -22,7 +22,7 @@ import java.util.concurrent.Executors;
 public class Example25_ArduinoLEDActivity extends AppCompatActivity {
 
     private Switch ledBtn;
-    private SeekBar rpmBar;
+    private SeekBar pwmBar;
 
     private ExecutorService executor;
     private LEDStatus ledStatus;
@@ -53,8 +53,8 @@ public class Example25_ArduinoLEDActivity extends AppCompatActivity {
             }
         });
 
-        rpmBar = findViewById(R.id._25_LedRpmBar);
-        rpmBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+        pwmBar = findViewById(R.id._25_LedpwmBar);
+        pwmBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 if(progress != 0) {
@@ -103,16 +103,16 @@ public class Example25_ArduinoLEDActivity extends AppCompatActivity {
 
 class LEDStatus {
     private boolean flag;
-    private int rpm;
+    private int pwm;
 
     LEDStatus() {
         this.flag = false;
-        this.rpm = 0;
+        this.pwm = 0;
     }
 
-    public void setStatus(boolean flag, int rpm) {
+    public void setStatus(boolean flag, int pwm) {
         this.flag = flag;
-        this.rpm = rpm;
+        this.pwm = pwm;
     }
 
     public void setFlag(boolean flag) {
@@ -123,8 +123,8 @@ class LEDStatus {
         return this.flag;
     }
 
-    public int getRpm() {
-        return this.rpm;
+    public int getpwm() {
+        return this.pwm;
     }
 }
 
@@ -162,9 +162,9 @@ class EX25_SignalSender implements Runnable {
 
         while(true) {
             if(status.getFlag()) {
-                Log.i("Runnable", "" + status.getRpm());
+                Log.i("Runnable", "" + status.getpwm());
                 try {
-                    this.out.println(status.getRpm());
+                    this.out.println(status.getpwm());
                     this.out.flush();
                     status.setFlag(false);
                 } catch (Exception e) {
