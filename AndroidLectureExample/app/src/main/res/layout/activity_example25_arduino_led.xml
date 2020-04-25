@@ -56,6 +56,6 @@
         android:layout_marginHorizontal="50dp"
         android:layout_marginVertical="20dp"
         android:max="100"
-        android:id="@+id/_25_LedRpmBar" />
+        android:id="@+id/_25_LedPwmBar" />
 
 </LinearLayout>

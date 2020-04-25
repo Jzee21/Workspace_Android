@@ -7,15 +7,11 @@ import android.util.Log;
 import android.widget.CompoundButton;
 import android.widget.SeekBar;
 import android.widget.Switch;
-import android.widget.Toast;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.InetSocketAddress;
 import java.net.Socket;
-import java.net.UnknownHostException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -25,35 +21,35 @@ public class Example25_ArduinoLEDActivity extends AppCompatActivity {
     private SeekBar pwmBar;
 
     private ExecutorService executor;
-    private LEDStatus ledStatus;
+    private LEDState ledState;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_example25_arduino_led);
 
-        ledStatus = new LEDStatus();
+        ledState = new LEDState();
 
         executor = Executors.newFixedThreadPool(1);
-        executor.submit(new EX25_SignalSender(ledStatus));
+        executor.submit(new EX25_SignalSender(ledState));
 
         ledBtn = findViewById(R.id.switch1);
         ledBtn.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
-                    ledStatus.setStatus(true, 255);
+                    ledState.setStatus(true, 255);
 //                    pwm = 255;
 //                    flag = true;
                 } else {
-                    ledStatus.setStatus(true, 0);
+                    ledState.setStatus(true, 0);
 //                    pwm = 0;
 //                    flag = true;
                 }
             }
         });
 
-        pwmBar = findViewById(R.id._25_LedpwmBar);
+        pwmBar = findViewById(R.id._25_LedPwmBar);
         pwmBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
@@ -62,7 +58,7 @@ public class Example25_ArduinoLEDActivity extends AppCompatActivity {
                 } else {
                     ledBtn.setChecked(false);
                 }
-                ledStatus.setStatus(true, (int)(progress*2.55));
+                ledState.setStatus(true, (int)(progress*2.55));
                 // LED PWM Range : 0 ~ 255 (total 256 step)
             }
 
@@ -102,11 +98,11 @@ public class Example25_ArduinoLEDActivity extends AppCompatActivity {
 //    }
 }
 
-class LEDStatus {
+class LEDState {
     private boolean flag;
     private int pwm;
 
-    LEDStatus() {
+    LEDState() {
         this.flag = false;
         this.pwm = 0;
     }
@@ -136,9 +132,9 @@ class EX25_SignalSender implements Runnable {
     private Socket socket;
     private PrintWriter out;
 
-    private LEDStatus status;
+    private LEDState status;
 
-    EX25_SignalSender(LEDStatus status) {
+    EX25_SignalSender(LEDState status) {
         this.status = status;
     }
 
