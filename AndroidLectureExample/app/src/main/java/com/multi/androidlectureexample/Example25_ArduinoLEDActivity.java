@@ -19,6 +19,7 @@ public class Example25_ArduinoLEDActivity extends AppCompatActivity {
 
     private Switch ledBtn;
     private SeekBar pwmBar;
+    private boolean pwmBarFlag;
 
     private ExecutorService executor;
     private LEDState ledState;
@@ -29,6 +30,7 @@ public class Example25_ArduinoLEDActivity extends AppCompatActivity {
         setContentView(R.layout.activity_example25_arduino_led);
 
         ledState = new LEDState();
+        pwmBarFlag = false;
 
         executor = Executors.newFixedThreadPool(1);
         executor.submit(new EX25_SignalSender(ledState));
@@ -37,14 +39,13 @@ public class Example25_ArduinoLEDActivity extends AppCompatActivity {
         ledBtn.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    ledState.setStatus(true, 255);
-//                    pwm = 255;
-//                    flag = true;
-                } else {
-                    ledState.setStatus(true, 0);
-//                    pwm = 0;
-//                    flag = true;
+//                Log.i("Runnable", "" + ledState.getFlag());
+                if(!pwmBarFlag) {
+                    if (isChecked) {
+                        ledState.setState(true, 255);
+                    } else {
+                        ledState.setState(true, 0);
+                    }
                 }
             }
         });
@@ -53,27 +54,26 @@ public class Example25_ArduinoLEDActivity extends AppCompatActivity {
         pwmBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                Log.i("Runnable", (int)(progress*2.55) + " ");
                 if(progress != 0) {
                     ledBtn.setChecked(true);
                 } else {
                     ledBtn.setChecked(false);
                 }
-                ledState.setStatus(true, (int)(progress*2.55));
+                ledState.setState(true, (int)(progress*2.55));
                 // LED PWM Range : 0 ~ 255 (total 256 step)
             }
 
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
-
+                Log.i("Runnable", "onStart");
+                pwmBarFlag = true;
             }
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-                if(seekBar.getProgress() != 0) {
-                    ledBtn.setChecked(true);
-                } else {
-                    ledBtn.setChecked(false);
-                }
+                Log.i("Runnable", "onStop");
+                pwmBarFlag = false;
             }
         });
 
@@ -82,20 +82,9 @@ public class Example25_ArduinoLEDActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-//        stopRun();
         executor.shutdownNow();
     }
 
-//    void stopRun() {
-//        try {
-//            if (socket != null && !socket.isClosed()) {
-//                socket.close();
-//                if (out != null) out.close();
-//            }
-//        } catch (IOException e) {
-//            //
-//        }
-//    }
 }
 
 class LEDState {
@@ -107,7 +96,7 @@ class LEDState {
         this.pwm = 0;
     }
 
-    public void setStatus(boolean flag, int pwm) {
+    public void setState(boolean flag, int pwm) {
         this.flag = flag;
         this.pwm = pwm;
     }
@@ -132,101 +121,50 @@ class EX25_SignalSender implements Runnable {
     private Socket socket;
     private PrintWriter out;
 
-    private LEDState status;
+    private LEDState state;
 
-    EX25_SignalSender(LEDState status) {
-        this.status = status;
+    EX25_SignalSender(LEDState state) {
+        this.state = state;
     }
 
     @Override
     public void run() {
 
-        try {
-            this.socket = new Socket();
-            this.socket.connect(new InetSocketAddress(ADDR, PORT));
-            this.out = new PrintWriter(this.socket.getOutputStream());
-        } catch (Exception e) {
-            if (this.socket != null && !this.socket.isClosed()) {
-                try {
-                    this.socket.close();
-                    Log.i("Runnable", "fail - connect socket");
-                    Log.i("Runnable", e.toString());
-                } catch (IOException ex) {
-                    return;
-                }
-            }
-        }
+//        try {
+//            this.socket = new Socket();
+//            this.socket.connect(new InetSocketAddress(ADDR, PORT));
+//            this.out = new PrintWriter(this.socket.getOutputStream());
+//        } catch (Exception e) {
+//            if (this.socket != null && !this.socket.isClosed()) {
+//                try {
+//                    this.socket.close();
+//                    Log.i("Runnable", "fail - connect socket");
+//                    Log.i("Runnable", e.toString());
+//                } catch (IOException ex) {
+//                    return;
+//                }
+//            }
+//        }
 
         while(true) {
-            if(status.getFlag()) {
-                Log.i("Runnable", "" + status.getpwm());
+            if(state.getFlag()) {
+                Log.i("Runnable", state.getpwm() + " ** Send");
                 try {
-                    this.out.println(status.getpwm());
-                    this.out.flush();
-                    status.setFlag(false);
+//                    this.out.println(state.getpwm());
+//                    this.out.flush();
+                    state.setFlag(false);
                 } catch (Exception e) {
-                    if (this.socket != null && !this.socket.isClosed()) {
-                        try {
-                            this.socket.close();
-                            this.out.close();
-                            Log.i("Runnable", "fail - send data");
-                        } catch (IOException ex) {
-                            return;
-                        }
-                    }
+//                    if (this.socket != null && !this.socket.isClosed()) {
+//                        try {
+//                            this.socket.close();
+//                            this.out.close();
+//                            Log.i("Runnable", "fail - send data");
+//                        } catch (IOException ex) {
+//                            return;
+//                        }
+//                    }
                 }
             }
         }
     }
 }
-
-    /*class TestRunnable implements Runnable {
-
-        TestRunnable() {
-            Toast.makeText(Example25_ArduinoLEDActivity.this, "생성자", Toast.LENGTH_LONG).show();
-        }
-
-        @Override
-        public void run() {
-            for (int i=0 ; i<3 ; i++) {
-                try {
-                    Thread.sleep(3000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                Toast.makeText(Example25_ArduinoLEDActivity.this, "run() : " + i, Toast.LENGTH_LONG).show();
-            }
-        }
-    }*/
-
-
-//    class EX25_SignalSender implements Runnable {
-//
-//        EX25_SignalSender() {
-//            try {
-//                socket = new Socket();
-//                socket.connect  (new InetSocketAddress(ADDR, PORT));
-//                out = new PrintWriter(socket.getOutputStream());
-//            } catch (IOException e) {
-//                Toast.makeText(Example25_ArduinoLEDActivity.this, "생성자", Toast.LENGTH_LONG).show();
-//                stopRun();
-//            }
-//        }
-//
-//        @Override
-//        public void run() {
-//            while (true) {
-//                try {
-//                    if(flag) {
-//                        out.println(pwm);
-//                        out.flush();
-//                        flag = false;
-//                    }
-//                } catch (Exception e) {
-//                    stopRun();
-//                }
-//            }
-//        } // run
-//    } // runnable
-
-
