@@ -62,7 +62,8 @@ public class Example25_ArduinoLEDActivity extends AppCompatActivity {
                 } else {
                     ledBtn.setChecked(false);
                 }
-                ledStatus.setStatus(true, (int)(progress*2.56));
+                ledStatus.setStatus(true, (int)(progress*2.55));
+                // LED PWM Range : 0 ~ 255 (total 256 step)
             }
 
             @Override
