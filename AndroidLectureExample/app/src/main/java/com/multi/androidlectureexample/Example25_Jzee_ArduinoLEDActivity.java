@@ -1,12 +1,12 @@
 package com.multi.androidlectureexample;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.CompoundButton;
 import android.widget.SeekBar;
 import android.widget.Switch;
-
-import androidx.appcompat.app.AppCompatActivity;
 
 import java.io.IOException;
 import java.io.PrintWriter;
