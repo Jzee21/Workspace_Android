@@ -5,10 +5,13 @@ import android.util.Log;
 import android.widget.CompoundButton;
 import android.widget.SeekBar;
 import android.widget.Switch;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.InetSocketAddress;
 import java.net.Socket;
@@ -18,12 +21,15 @@ import java.util.concurrent.Executors;
 
 public class Example25_ArduinoLEDActivity extends AppCompatActivity {
 
+    private TextView responseTV;
     private Switch ledBtn;
     private SeekBar pwmBar;
     private boolean pwmBarFlag;
 
     private Socket socket;
     private PrintWriter out;
+    private BufferedReader in;
+    private boolean readyFlag;
 
     class SharedObject {
         private Object MONITOR = new Object();
@@ -60,6 +66,7 @@ public class Example25_ArduinoLEDActivity extends AppCompatActivity {
         setContentView(R.layout.activity_example25_arduino_led);
 
         final SharedObject shared = new SharedObject();
+        readyFlag = true;
 
         Runnable r = new Runnable() {
             @Override
@@ -68,6 +75,10 @@ public class Example25_ArduinoLEDActivity extends AppCompatActivity {
                     socket = new Socket();
                     socket.connect(new InetSocketAddress("70.12.60.91", 55566));
                     out = new PrintWriter(socket.getOutputStream());
+                    in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+                    readyFlag = false;
+                    notify();
+                    Log.i("Arduino", "notify");
 
                     while (true) {
                         int data = shared.pop();
@@ -81,6 +92,39 @@ public class Example25_ArduinoLEDActivity extends AppCompatActivity {
         }; // Runnable r
         Thread t = new Thread(r);
         t.start();
+
+//        Runnable r2 = new Runnable() {
+//            @Override
+//            public void run() {
+//                try {
+//                    synchronized (this) {
+//                        while(readyFlag) {
+//                            wait();
+//                        }
+//                    }
+//
+//                    Log.i("Arduino", "break wait()");
+//
+//                    while(true) {
+//                        try {
+//                            String msg = in.readLine();
+//                            responseTV.setText(msg);
+//                        } catch (IOException e) {
+//                            Log.i("Arduino", e.toString());
+//                            break;
+//                        }
+//                    }
+//
+//
+//                } catch (InterruptedException e) {
+//                    Log.i("Arduino", e.toString());
+//                }
+//            }
+//        };
+//        Thread t2 = new Thread(r2);
+//        t2.start();
+
+        responseTV = findViewById(R.id._25_responseTV);
 
         ledBtn = findViewById(R.id.switch1);
         ledBtn.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
