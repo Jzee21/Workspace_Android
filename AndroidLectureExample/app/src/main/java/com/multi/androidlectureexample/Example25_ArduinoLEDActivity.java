@@ -51,8 +51,8 @@ public class Example25_ArduinoLEDActivity extends AppCompatActivity {
                 }
             }
             return result;
-        }
-    }
+        } // pop()
+    } // class SharedObject
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,8 +77,8 @@ public class Example25_ArduinoLEDActivity extends AppCompatActivity {
                 } catch (IOException e) {
                     Log.i("Arduino", e.toString());
                 }
-            }
-        };
+            } // run()
+        }; // Runnable r
         Thread t = new Thread(r);
         t.start();
 
@@ -89,18 +89,25 @@ public class Example25_ArduinoLEDActivity extends AppCompatActivity {
                 if(!pwmBarFlag) {
                     if(isChecked) {
                         shared.put(255);
+                        pwmBar.setProgress(255);
                     }
                     else {
                         shared.put(0);
+                        pwmBar.setProgress(0);
                     }
                 }
             }
-        });
+        }); // ledBtn.setOnCheckedChangeListener
 
         pwmBar = findViewById(R.id._25_LedPwmBar);
         pwmBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                if(progress == 0) {
+                    ledBtn.setChecked(false);
+                } else {
+                    ledBtn.setChecked(true);
+                }
                 shared.put((int)(progress*2.55));
             }
 
@@ -113,8 +120,20 @@ public class Example25_ArduinoLEDActivity extends AppCompatActivity {
             public void onStopTrackingTouch(SeekBar seekBar) {
                 pwmBarFlag = false;
             }
-        });
+        }); // pwmBar.setOnSeekBarChangeListener
 
-    }
+    } // onCreate()
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if(socket != null && !socket.isClosed()) {
+            try {
+                socket.close();
+                out.close();
+            } catch (IOException e) {
+                Log.i("Arduino", e.toString());
+            }
+        }
+    } // onDestroy()
 }
