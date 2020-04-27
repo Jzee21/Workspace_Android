@@ -88,11 +88,11 @@ public class Example25_ArduinoLEDActivity extends AppCompatActivity {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(!pwmBarFlag) {
                     if(isChecked) {
-                        shared.put(255);
-                        pwmBar.setProgress(255);
+//                        shared.put(255);
+                        pwmBar.setProgress(100);
                     }
                     else {
-                        shared.put(0);
+//                        shared.put(0);
                         pwmBar.setProgress(0);
                     }
                 }
