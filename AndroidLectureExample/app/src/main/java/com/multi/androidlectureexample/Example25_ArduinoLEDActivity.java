@@ -130,39 +130,39 @@ class EX25_SignalSender implements Runnable {
     @Override
     public void run() {
 
-//        try {
-//            this.socket = new Socket();
-//            this.socket.connect(new InetSocketAddress(ADDR, PORT));
-//            this.out = new PrintWriter(this.socket.getOutputStream());
-//        } catch (Exception e) {
-//            if (this.socket != null && !this.socket.isClosed()) {
-//                try {
-//                    this.socket.close();
-//                    Log.i("Runnable", "fail - connect socket");
-//                    Log.i("Runnable", e.toString());
-//                } catch (IOException ex) {
-//                    return;
-//                }
-//            }
-//        }
+        try {
+            this.socket = new Socket();
+            this.socket.connect(new InetSocketAddress(ADDR, PORT));
+            this.out = new PrintWriter(this.socket.getOutputStream());
+        } catch (Exception e) {
+            if (this.socket != null && !this.socket.isClosed()) {
+                try {
+                    this.socket.close();
+                    Log.i("Runnable", "fail - connect socket");
+                    Log.i("Runnable", e.toString());
+                } catch (IOException ex) {
+                    return;
+                }
+            }
+        }
 
         while(true) {
             if(state.getFlag()) {
                 Log.i("Runnable", state.getpwm() + " ** Send");
                 try {
-//                    this.out.println(state.getpwm());
-//                    this.out.flush();
+                    this.out.println(state.getpwm());
+                    this.out.flush();
                     state.setFlag(false);
                 } catch (Exception e) {
-//                    if (this.socket != null && !this.socket.isClosed()) {
-//                        try {
-//                            this.socket.close();
-//                            this.out.close();
-//                            Log.i("Runnable", "fail - send data");
-//                        } catch (IOException ex) {
-//                            return;
-//                        }
-//                    }
+                    if (this.socket != null && !this.socket.isClosed()) {
+                        try {
+                            this.socket.close();
+                            this.out.close();
+                            Log.i("Runnable", "fail - send data");
+                        } catch (IOException ex) {
+                            return;
+                        }
+                    }
                 }
             }
         }
