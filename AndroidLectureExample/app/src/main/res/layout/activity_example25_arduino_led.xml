@@ -60,7 +60,7 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="50dp"
         android:layout_marginVertical="20dp"
-        android:max="100"
+        android:max="255"
         android:id="@+id/_25_LedPwmBar" />
 
 </LinearLayout>

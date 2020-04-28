@@ -30,6 +30,7 @@ public class Example25_ArduinoLEDActivity extends AppCompatActivity {
     private PrintWriter out;
     private BufferedReader in;
     private boolean readyFlag;
+    private Thread serverThread;
 
     class SharedObject {
         private Object MONITOR = new Object();
@@ -65,65 +66,82 @@ public class Example25_ArduinoLEDActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_example25_arduino_led);
 
-        final SharedObject shared = new SharedObject();
+        final SharedObject sender = new SharedObject();
+//        final SharedObject receiver = new SharedObject();
         readyFlag = true;
+
+
+        final Runnable sendRunnable = new Runnable() {
+            @Override
+            public void run() {
+                while (true) {
+                    int data = sender.pop();
+                    out.println(data);
+                    out.flush();
+                }
+            }
+        };
+
+        final Runnable receiveRunnable = new Runnable() {
+            @Override
+            public void run() {
+                while (true) {
+                    try {
+                        String message = in.readLine();
+                        if(message == null) {
+                            serverThread.interrupt();
+                        }
+//                        responseTV.setText(message);
+                        String[] msgData = message.split("/");
+                        if(msgData.length > 1) {
+                            responseTV.setText(msgData[msgData.length-1]);
+                        } else {
+                            responseTV.setText(message.replace("/", ""));
+                        }
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        break;
+                    }
+
+                }
+            }
+        };
 
         Runnable r = new Runnable() {
             @Override
             public void run() {
                 try {
                     socket = new Socket();
-                    socket.connect(new InetSocketAddress("70.12.60.91", 55566));
+//                    socket.connect(new InetSocketAddress("70.12.60.91", 55566));
+                    socket.connect(new InetSocketAddress("70.12.227.108", 55566));
                     out = new PrintWriter(socket.getOutputStream());
                     in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
                     readyFlag = false;
-                    notify();
-                    Log.i("Arduino", "notify");
+//                    notify();
+//                    Log.i("Arduino", "notify");
 
-                    while (true) {
-                        int data = shared.pop();
-                        out.println(data);
-                        out.flush();
-                    }
-                } catch (IOException e) {
+                    Thread in1 = new Thread(sendRunnable);
+                    Thread in2 = new Thread(receiveRunnable);
+                    in1.setDaemon(true);
+                    in2.setDaemon(true);
+
+                    in1.start();
+                    in2.start();
+
+//                    while (true) {
+//                        int data = sender.pop();
+//                        out.println(data);
+//                        out.flush();
+//                    }
+                } catch (Exception e) {
                     Log.i("Arduino", e.toString());
                 }
             } // run()
         }; // Runnable r
-        Thread t = new Thread(r);
-        t.start();
+        serverThread = new Thread(r);
+        serverThread.start();
 
-//        Runnable r2 = new Runnable() {
-//            @Override
-//            public void run() {
-//                try {
-//                    synchronized (this) {
-//                        while(readyFlag) {
-//                            wait();
-//                        }
-//                    }
-//
-//                    Log.i("Arduino", "break wait()");
-//
-//                    while(true) {
-//                        try {
-//                            String msg = in.readLine();
-//                            responseTV.setText(msg);
-//                        } catch (IOException e) {
-//                            Log.i("Arduino", e.toString());
-//                            break;
-//                        }
-//                    }
-//
-//
-//                } catch (InterruptedException e) {
-//                    Log.i("Arduino", e.toString());
-//                }
-//            }
-//        };
-//        Thread t2 = new Thread(r2);
-//        t2.start();
-
+        //
         responseTV = findViewById(R.id._25_responseTV);
 
         ledBtn = findViewById(R.id.switch1);
@@ -133,7 +151,7 @@ public class Example25_ArduinoLEDActivity extends AppCompatActivity {
                 if(!pwmBarFlag) {
                     if(isChecked) {
 //                        shared.put(255);
-                        pwmBar.setProgress(100);
+                        pwmBar.setProgress(255);
                     }
                     else {
 //                        shared.put(0);
@@ -152,7 +170,7 @@ public class Example25_ArduinoLEDActivity extends AppCompatActivity {
                 } else {
                     ledBtn.setChecked(true);
                 }
-                shared.put((int)(progress*2.55));
+                sender.put(progress);
             }
 
             @Override
@@ -175,6 +193,7 @@ public class Example25_ArduinoLEDActivity extends AppCompatActivity {
             try {
                 socket.close();
                 out.close();
+//                serverThread.interrupt();
             } catch (IOException e) {
                 Log.i("Arduino", e.toString());
             }
